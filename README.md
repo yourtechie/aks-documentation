@@ -109,7 +109,7 @@ In conclusion, creating an Azure Kubernetes Service (AKS) instance is a straight
 
 
 ## Creating AKS Cluster using CLI
-Certainly! Using the Azure Command-Line Interface (CLI) provides a powerful and efficient alternative for creating an Azure Kubernetes Service (AKS) instance. Below is a guide on how to create an AKS cluster using the Azure CLI:
+You can also use the Azure Command-Line Interface (CLI), it provides a powerful and efficient alternative for creating an Azure Kubernetes Service (AKS) instance. Below is a guide on how to create an AKS cluster using the Azure CLI:
 
 **Step 1: Install Azure CLI**
    - If you haven't already installed the Azure CLI, you can download and install it from the official Azure CLI installation page (https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
