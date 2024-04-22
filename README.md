@@ -9,13 +9,13 @@ Azure Kubernetes Service (AKS), on the other hand, is a managed Kubernetes servi
 In summary, Kubernetes is the open-source container orchestration platform, while Azure Kubernetes Service (AKS) is a managed service that offers Kubernetes functionality within the Azure cloud ecosystem, providing ease of use and integration with other Azure services.
 
 
-**How Azure Kubernetes Service Works**
+## **How Azure Kubernetes Service Works**
 
 Azure Kubernetes Service (AKS) is a managed Kubernetes service offered by Microsoft Azure, designed to simplify the deployment, management, and scaling of containerized applications in the cloud environment. 
 
 Understanding how AKS functions entails delving into its underlying mechanisms, including its architecture, deployment process, and key features.
 
-**Architecture:**
+### **Architecture:**
 
 At its core, AKS operates on the principles of Kubernetes, the open-source container orchestration platform. Kubernetes utilizes a master-slave architecture, consisting of a control plane (master) and multiple worker nodes (slaves). Similarly, AKS comprises the following components:
 
@@ -31,7 +31,7 @@ At its core, AKS operates on the principles of Kubernetes, the open-source conta
 4. **Storage:**
    - AKS offers integration with various Azure storage options, such as Azure Disks, Azure Files, and Azure NetApp Files, for persistent storage requirements of containerized applications. This enables stateful applications to store and retrieve data seamlessly.
 
-**Deployment Process:**
+### **Deployment Process:**
 
 Deploying applications on AKS involves several steps, including:
 
@@ -47,7 +47,7 @@ Deploying applications on AKS involves several steps, including:
 4. **Scaling and Management:**
    - AKS provides tools and features for scaling and managing applications effectively. Users can dynamically scale the number of replicas of their application pods based on resource utilization metrics or predefined policies. Additionally, AKS integrates with Azure Monitor for monitoring cluster health, performance, and resource utilization.
 
-**Key Features:**
+### **Key Features:**
 
 1. **Managed Control Plane:**
    - Azure manages the Kubernetes control plane, including etcd, API server, scheduler, and controller manager, ensuring high availability, security, and reliability.
