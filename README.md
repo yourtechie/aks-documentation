@@ -46,8 +46,6 @@ These components collectively form the foundation of AKS, providing a managed Ku
 
 ## **How Azure Kubernetes Service Works**
 
-Azure Kubernetes Service (AKS) is a managed Kubernetes service offered by Microsoft Azure, designed to simplify the deployment, management, and scaling of containerized applications in the cloud environment. 
-
 Understanding how AKS functions entails delving into its underlying mechanisms, including its architecture, deployment process, and key features.
 
 ### **Architecture:**
@@ -218,3 +216,54 @@ The primary difference between AAD integration and service principals lies in th
 - Service principals are used for machine-to-machine authentication and authorization to access Azure resources programmatically.
 
 - While AAD integration is centered around user identities and their access to resources, service principals are used by applications and services for automation and programmatic access without requiring user interaction.
+
+
+# How to Configure DNS Server on AKS
+Setting up a DNS server in Azure Kubernetes Service (AKS) involves several steps. Here's a basic outline of the process:
+Configuring a DNS server on Azure Kubernetes Service (AKS) typically involves using CoreDNS, which is the default DNS provider for AKS clusters. Here are the steps to configure DNS on AKS:
+
+1. **Create an AKS Cluster**: If you haven't already, create an AKS cluster in the Azure portal or using the Azure CLI.
+
+2. **Connect to Your Cluster**: Use `kubectl` to connect to your AKS cluster. You can do this by running:
+
+    ```bash
+    az aks get-credentials --resource-group <resource-group-name> --name <cluster-name>
+    ```
+
+3. **Check Existing DNS Configuration**: By default, AKS clusters use CoreDNS for DNS resolution. You don't need to install CoreDNS separately; it's already included in AKS clusters.
+
+4. **Configure DNS Resolution Options (Optional)**: If you need to customize DNS resolution options, such as specifying upstream DNS servers or modifying CoreDNS configuration, you can do so by modifying the CoreDNS configuration.
+
+5. **View CoreDNS Configuration (Optional)**: You can view the CoreDNS configuration by running:
+
+    ```bash
+    kubectl get configmap coredns -n kube-system -o yaml
+    ```
+
+    This will display the CoreDNS configuration in YAML format. You can edit this configuration to suit your needs.
+
+6. **Apply CoreDNS Configuration Changes (Optional)**: If you've made changes to the CoreDNS configuration, apply those changes by running:
+
+    ```bash
+    kubectl apply -f <path-to-updated-configmap.yaml>
+    ```
+
+    Replace `<path-to-updated-configmap.yaml>` with the path to your updated CoreDNS configuration file.
+
+7. **Verify DNS Resolution**: Deploy a test pod and verify that DNS resolution is working as expected. You can do this by creating a pod and then running a DNS query inside the pod:
+
+    ```bash
+    kubectl run -it --rm test --image=busybox:1.28 --restart=Never -- nslookup <domain-name>
+    ```
+
+    Replace `<domain-name>` with the domain you want to resolve. You should see the IP address(es) associated with that domain.
+
+8. **Monitor DNS Resolution**: Monitor the DNS resolution in your AKS cluster to ensure it's functioning correctly. You can check the logs of the CoreDNS pods for any errors:
+
+    ```bash
+    kubectl logs -n kube-system <coredns-pod-name>
+    ```
+
+    Replace `<coredns-pod-name>` with the name of one of the CoreDNS pods running in the `kube-system` namespace.
+
+By these steps, you've configured DNS on Azure Kubernetes Service (AKS) using CoreDNS. Make sure to adjust configurations and settings according to your specific requirements and environment.
