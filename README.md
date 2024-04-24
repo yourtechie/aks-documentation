@@ -191,6 +191,93 @@ Below is a guide on how to create an AKS cluster using the Azure CLI:
 Using the Azure CLI streamlines the process of creating an Azure Kubernetes Service (AKS) instance, allowing users to leverage the power of command-line interfaces for efficient and automated deployment of resources in the Azure cloud environment.
 
 
+
+# How to Deploy Applications on AKS
+Deploying applications on Azure Kubernetes Service (AKS) involves several steps to package, configure, and deploy containerized applications onto the Kubernetes cluster. Here's a guide on how to deploy applications on AKS:
+
+**1. Containerize Your Application:**
+
+Before deploying your application to AKS, you need to containerize it using Docker. Containerization involves packaging your application and its dependencies into Docker containers, which encapsulate the runtime environment and ensure consistency across different environments.
+
+**2. Create Kubernetes Deployment Manifests:**
+
+Kubernetes uses YAML manifests to define the desired state of applications, including deployment configurations, pod specifications, and service definitions. Create a Kubernetes Deployment YAML file that describes how your application should be deployed, including details such as container image, resource requirements, replicas, and environment variables.
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app-container
+        image: your-container-image:tag
+        ports:
+        - containerPort: 80
+        # Add additional configuration here
+```
+
+**3. Apply the Deployment Manifest:**
+
+Use the `kubectl apply` command to apply the Kubernetes Deployment manifest and deploy your application to the AKS cluster.
+
+```bash
+kubectl apply -f your-deployment.yaml
+```
+
+This command will create the necessary resources (pods, deployments, services) in the AKS cluster based on the specifications defined in the YAML file.
+
+**4. Access Your Application:**
+
+Once the deployment is successful, Kubernetes will schedule pods to run your application containers. Use the `kubectl get pods` command to check the status of your pods and ensure that they are running.
+
+```bash
+kubectl get pods
+```
+
+To access your application externally, you may need to expose it using a Kubernetes Service. Create a Service YAML file to define how your application should be exposed, then apply it to the cluster.
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-service
+spec:
+  selector:
+    app: my-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
+```
+
+Apply the Service manifest:
+
+```bash
+kubectl apply -f your-service.yaml
+```
+
+**5. Verify and Test Your Application:**
+
+Once your application is deployed and accessible, verify that it's functioning correctly by accessing it through the exposed service endpoint. Test different functionalities of your application to ensure that it behaves as expected in the Kubernetes environment.
+
+**6. Continuous Deployment (Optional):**
+
+For automated and continuous deployment of updates to your application, integrate AKS with your CI/CD pipeline. Tools like Azure DevOps, Jenkins, or GitLab CI/CD can automate the build, test, and deployment processes, allowing you to rapidly iterate on your application code and configurations.
+
+By following these steps, you can successfully deploy your applications onto Azure Kubernetes Service (AKS) and leverage the scalability, resilience, and agility of Kubernetes for managing containerized workloads in the cloud.
+
+
 # Azure Active Directory Integration and Service Principals
 Azure Active Directory (AAD) integration and service principals are both essential components in Azure for managing access to resources, but they serve different purposes.
 
